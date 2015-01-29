@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		922A4C821A7AD044009B43CB /* TaskDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922A4C811A7AD044009B43CB /* TaskDocument.swift */; };
 		923912BA1A506D38009CA1A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923912B91A506D38009CA1A8 /* AppDelegate.swift */; };
 		923912BC1A506D38009CA1A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923912BB1A506D38009CA1A8 /* ViewController.swift */; };
 		923912BF1A506D38009CA1A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 923912BD1A506D38009CA1A8 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		922A4C811A7AD044009B43CB /* TaskDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDocument.swift; sourceTree = "<group>"; };
 		923912B41A506D38009CA1A8 /* Tasks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		923912B81A506D38009CA1A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		923912B91A506D38009CA1A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				923912B91A506D38009CA1A8 /* AppDelegate.swift */,
 				923912BB1A506D38009CA1A8 /* ViewController.swift */,
+				922A4C811A7AD044009B43CB /* TaskDocument.swift */,
 				92E719411A571D1600CCF44C /* Tasks.swift */,
 				923912BD1A506D38009CA1A8 /* Main.storyboard */,
 				923912D91A508FF9009CA1A8 /* NewTaskViewController.swift */,
@@ -226,6 +229,7 @@
 				923912DC1A509031009CA1A8 /* DetailedTaskViewController.swift in Sources */,
 				92E719421A571D1600CCF44C /* Tasks.swift in Sources */,
 				923912BA1A506D38009CA1A8 /* AppDelegate.swift in Sources */,
+				922A4C821A7AD044009B43CB /* TaskDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
