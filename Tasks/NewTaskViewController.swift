@@ -11,9 +11,7 @@ import UIKit
 class NewTaskViewController: UIViewController {
 
     @IBOutlet weak var taskName: UITextField!
-    
-    //var list: AnyObject? = AnyObject?()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 

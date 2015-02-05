@@ -14,7 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     
     override func awakeFromNib(){
-        //TaskDocument.sharedInstance.tasks.append(Task(name: "Задача 1"))
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "insertNewObject", name: "ItemAddedRightNow", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: "TaskAccomplished", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: "DataLoaded", object: nil)

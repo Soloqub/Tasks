@@ -30,31 +30,3 @@ class Task: NSObject, NSCoding {
     }
    
 }
-
-/*class TaskList {
-    
-    var list = [Task]()
-    
-    class var sharedInstance :TaskList {
-        struct Singleton {
-            static let instance = TaskList()
-        }
-        
-        return Singleton.instance
-    }
-    
-    func sendNotification(notification : String){
-        switch notification {
-            
-            case "ItemAdded":
-                NSNotificationCenter.defaultCenter().postNotificationName("ItemAddedRightNow", object: self)
-            
-            case "TaskCompleted":
-                NSNotificationCenter.defaultCenter().postNotificationName("TaskAccomplished", object: self)
-            
-            default:
-                break
-        }
-    }
-}
-*/

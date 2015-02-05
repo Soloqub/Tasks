@@ -39,13 +39,6 @@ class TaskDocument: UIDocument {
     }
     
     override func contentsForType(typeName: String, error outError: NSErrorPointer) -> AnyObject? {
-        /*if docWrapper == nil {
-            let url = TaskDocument.documentURL()
-            docWrapper = NSFileWrapper(URL: url, options: NSFileWrapperReadingOptions.allZeros, error: nil)
-        }*/
-        //let url = TaskDocument.documentURL()    directoryWithFileWrappers: [:]
-        //docWrapper = NSFileWrapper(URL: url, options: NSFileWrapperReadingOptions.allZeros, error: nil)
-        //docWrapper = NSFileWrapper(directoryWithFileWrappers: [:] )
 
         var wrapper = docWrapper.fileWrappers["tasks.data"] as NSFileWrapper?
         if wrapper != nil {
@@ -53,12 +46,6 @@ class TaskDocument: UIDocument {
         }
         
         var tasksData:NSData = NSKeyedArchiver.archivedDataWithRootObject(tasks)
-        ///testing///
-        /*println(tasks.count)
-        for a in tasks{
-            println(a.taskName)
-        }*/
-        ///testing///
         docWrapper.addRegularFileWithContents(tasksData, preferredFilename: "tasks.data")
         return docWrapper
     }
@@ -70,14 +57,8 @@ class TaskDocument: UIDocument {
         if data != nil {
             tasks = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as [Task]
         }
-        ///testing///
-        println(tasks.count)
-        for a in tasks{
-        println(a.taskName)
-        }
-        ///testing///
+
         self.sendNotification("DataLoaded")
-        
         return true
     }
     
