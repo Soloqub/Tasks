@@ -14,13 +14,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     
     override func awakeFromNib(){
-        TaskList.sharedInstance.list.append(Task(name: "Задача 1"))
+        //TaskDocument.sharedInstance.tasks.append(Task(name: "Задача 1"))
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "insertNewObject", name: "ItemAddedRightNow", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeTask", name: "TaskAccomplished", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: "TaskAccomplished", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView", name: "DataLoaded", object: nil)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TaskList.sharedInstance.list.count
+        return TaskDocument.sharedInstance.tasks.count
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
@@ -29,10 +30,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        let task = TaskList.sharedInstance.list[TaskList.sharedInstance.list.count - indexPath.row - 1] as Task
+        let task = TaskDocument.sharedInstance.tasks[TaskDocument.sharedInstance.tasks.count - indexPath.row - 1] as Task
         if task.completed == true{
             let strikeThroughAttributes = [NSStrikethroughStyleAttributeName : 1]
-            let strikeThroughString = NSAttributedString(string: TaskList.sharedInstance.list[TaskList.sharedInstance.list.count - indexPath.row - 1].taskName, attributes: strikeThroughAttributes)
+            let strikeThroughString = NSAttributedString(string: TaskDocument.sharedInstance.tasks[TaskDocument.sharedInstance.tasks.count - indexPath.row - 1].taskName, attributes: strikeThroughAttributes)
+            cell.textLabel?.attributedText = strikeThroughString
+        } else {
+            let strikeThroughAttributes = [NSStrikethroughStyleAttributeName : 0]
+            let strikeThroughString = NSAttributedString(string: TaskDocument.sharedInstance.tasks[TaskDocument.sharedInstance.tasks.count - indexPath.row - 1].taskName, attributes: strikeThroughAttributes)
             cell.textLabel?.attributedText = strikeThroughString
         }
         cell.textLabel?.text = task.taskName
@@ -42,27 +47,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func insertNewObject() {
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        TaskDocument.sharedInstance.updateChangeCount(UIDocumentChangeKind.Done)
         
         /*println("Массив \"Список дел:\"")
-        println("Количество элементов: \(TaskList.sharedInstance.list.count)")
+        println("Количество элементов: \(TaskDocument.sharedInstance.list.count)")
         println("Элементы: ")
-        for i in TaskList.sharedInstance.list {
+        for i in TaskDocument.sharedInstance.list {
             println(i.taskName)
         }
         println("-------------------------")*/
     }
     
-    func closeTask() {
+    func reloadTableView() {
         self.tableView.reloadData()
+        TaskDocument.sharedInstance.updateChangeCount(UIDocumentChangeKind.Done)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "taskSegue" {
             var indexPath = self.tableView.indexPathForSelectedRow()
             if indexPath == nil{
-                indexPath = NSIndexPath(forRow: TaskList.sharedInstance.list.count-1, inSection: 0)
+                indexPath = NSIndexPath(forRow: TaskDocument.sharedInstance.tasks.count-1, inSection: 0)
             }
-            let smth = TaskList.sharedInstance.list[TaskList.sharedInstance.list.count - indexPath!.row - 1]
+            let smth = TaskDocument.sharedInstance.tasks[TaskDocument.sharedInstance.tasks.count - indexPath!.row - 1]
             (segue.destinationViewController as DetailedTaskViewController).task = smth
         }
         
@@ -91,7 +98,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             
             // handle delete (by removing the data from your array and updating the tableview)
-            TaskList.sharedInstance.list.removeAtIndex(TaskList.sharedInstance.list.count - indexPath.row - 1)
+            TaskDocument.sharedInstance.tasks.removeAtIndex(TaskDocument.sharedInstance.tasks.count - indexPath.row - 1)
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
         }
     }

@@ -43,8 +43,8 @@ class NewTaskViewController: UIViewController {
 
             return
         } else {
-            TaskList.sharedInstance.list.append(Task(name: self.taskName.text))
-            TaskList.sharedInstance.sendNotification("ItemAdded")
+            TaskDocument.sharedInstance.tasks.append(Task(name: self.taskName.text))
+            TaskDocument.sharedInstance.sendNotification("ItemAdded")
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         

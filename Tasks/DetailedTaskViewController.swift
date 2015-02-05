@@ -15,7 +15,7 @@ class DetailedTaskViewController: UIViewController {
     
     @IBAction func completeTask(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
-        TaskList.sharedInstance.sendNotification("TaskCompleted")
+        TaskDocument.sharedInstance.sendNotification("TaskCompleted")
         (self.task as Task).completed = true
     }
     
